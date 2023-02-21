@@ -21,4 +21,5 @@
   DISCORD_BOT_TOKEN = "Your Discord Bot Token"
   GUILD_ID = "ID of the guild this deployment targets"
   APPEALS_CHANNEL = "ID of the channel used for appeal form submission"
+  PUBLIC_CHANNEL = "ID OF PUBLIC CHANNEL"
   JWT_SECRET = "JSON Web Token secret, mash keyboard plz"
