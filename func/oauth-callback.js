@@ -53,7 +53,6 @@ export async function handler(event, context) {
             }
     
     
-           
             const userPublic = {
                 id: user.id,
                 avatar: user.avatar,

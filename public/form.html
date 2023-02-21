@@ -8,11 +8,11 @@
         <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
 
-        <title>NoAbuse Host Report Form</title>
+        <title>NoAbuse - Host Report Form</title>
     </head>
     <body>
         <div class="jumbotron text-center">
-            <h1>Hosting Report Form</h1>
+            <h1>Host Report Form</h1>
         </div>
 
         <div class="container mb-3">
@@ -31,31 +31,32 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="reportReason">Why are you reporting this host?</label>
+                    <label for="reason">Why are you reporting this host?</label>
                     <div class="textInput">
-                        <textarea class="form-control" id="reportReason" name="reportReason" required maxlength="1024"></textarea>
+                        <textarea class="form-control" id="reason" name="reason" required maxlength="1024"></textarea>
                         <div class="remainingLength"></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Evidence">Please Provide Evidence ( Link Only )</label>
+                    <label for="evidence">Please Provide Evidence ( Link Only )</label>
                     <div class="textInput">
-                        <textarea class="form-control" id="Evidence" name="Evidence" required maxlength="1024"></textarea>
+                        <textarea class="form-control" id="evidence" name="evidence" required maxlength="1024"></textarea>
                         <div class="remainingLength"></div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="website">Please provide host website.</label>
+                    <label for="website">Please provide host website link.</label>
                     <div class="textInput">
                         <textarea class="form-control" id="website" name="website" required maxlength="1024"></textarea>
                         <div class="remainingLength"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="discord">Please provide host discord.</label>
-                        <div class="textInput">
-                            <textarea class="form-control" id="discord" name="discord" required maxlength="1024"></textarea>
-                            <div class="remainingLength"></div>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label for="discord">Please provide host discord.</label>
+                    <div class="textInput">
+                        <textarea class="form-control" id="discord" name="discord" required maxlength="1024"></textarea>
+                        <div class="remainingLength"></div>
+                    </div>
                 </div>
                 <div class="text-right">
                     <button type="submit" class="btn">Submit</button>
