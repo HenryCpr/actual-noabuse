@@ -52,6 +52,16 @@ export async function handler(event, context) {
                 throw new Error("Failed to get user access token");
             }
     
+            const user = await getUserInfo(data.access_token);
+            if (isBlocked(user.id)) {
+                return {
+                    statusCode: 303,
+                    headers: {
+                        "Location": `/error?msg=${encodeURIComponent("You cannot submit ban appeals with this Discord account.")}`,
+                    },
+                };
+            }
+    
     
             const userPublic = {
                 id: user.id,
