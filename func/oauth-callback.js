@@ -52,6 +52,8 @@ export async function handler(event, context) {
                 throw new Error("Failed to get user access token");
             }
     
+    
+           
             const userPublic = {
                 id: user.id,
                 avatar: user.avatar,
