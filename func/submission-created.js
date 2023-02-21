@@ -18,21 +18,16 @@ export async function handler(event, context) {
 
         const params = new URLSearchParams(event.body);
         payload = {
-            hostName: params.get("hostName") || undefined,
-            reportReason: params.get("reportReason") || undefined,
-            Evidence: params.get("Evidence") || undefined,
-            website: params.get("reportReason") || undefined,
-            discord: params.get("Evidence") || undefined,
-            
+            banReason: params.get("banReason") || undefined,
+            appealText: params.get("appealText") || undefined,
+            futureActions: params.get("futureActions") || undefined,
             token: params.get("token") || undefined
         };
     }
 
-    if (payload.hostName !== undefined &&
-        payload.reportReason !== undefined &&
-        payload.Evidence !== undefined && 
-        payload.website !== undefined && 
-        payload.discord !== undefined && 
+    if (payload.banReason !== undefined &&
+        payload.appealText !== undefined &&
+        payload.futureActions !== undefined && 
         payload.token !== undefined) {
         
         const userInfo = decodeJwt(payload.token);
@@ -47,7 +42,7 @@ export async function handler(event, context) {
         
         const message = {
             embed: {
-                title: "New appeal submitted!",
+                title: "New report submitted!",
                 timestamp: new Date().toISOString(),
                 fields: [
                     {
@@ -73,11 +68,11 @@ export async function handler(event, context) {
                     {
                         name: "Please Provide Evidence ( Link Only )",
                         value: payload.Evidence.slice(0, MAX_EMBED_FIELD_CHARS)
-                    }
+                    },
                 ]
             }
         }
-
+        
         const acceptmsg = {
             embed: {
                 title: "New Blacklist",
@@ -102,27 +97,27 @@ export async function handler(event, context) {
                     {
                         name: "Please Provide Evidence ( Link Only )",
                         value: payload.Evidence.slice(0, MAX_EMBED_FIELD_CHARS)
-                    }
+                    },
                 ]
             }
         }
 
+            const accptmsg = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.PUBLIC_CHANNEL)}/messages`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
+                },
+                body: JSON.stringify(acceptmsg)
+            });
 
-        const accptmsg = await fetch(`${API_ENDPOINT}/channels/${encodeURIComponent(process.env.PUBLIC_CHANNEL)}/messages`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bot ${process.env.DISCORD_BOT_TOKEN}`
-            },
-            body: JSON.stringify(acceptmsg)
-        });
                 message.components = [{
                     type: 1,
                     components: [{
                         type: 2,
                         style: 5,
                         label: "Approve Report & Blacklist Host",
-                        url: `${acceptmsg}`
+                        url: `${accptmsg}`
                     }]
                 }];
             }
@@ -136,7 +131,7 @@ export async function handler(event, context) {
             },
             body: JSON.stringify(message)
         });
-    
+
         if (result.ok) {
             if (process.env.USE_NETLIFY_FORMS) {
                 return {
@@ -153,10 +148,11 @@ export async function handler(event, context) {
         } else {
             console.log(JSON.stringify(await result.json()));
             throw new Error("Failed to submit message");
-        }
-    
 
-    return {
-        statusCode: 400
-    };
+            return {
+                statusCode: 400
+        };
+        } 
+
+
 
