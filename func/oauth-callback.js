@@ -81,9 +81,5 @@ export async function handler(event, context) {
                 statusCode: 400
             };
         }
-    } else {
-        return {
-            statusCode: 403
-        };
-    }
+    } 
 }
